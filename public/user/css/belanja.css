@@ -1,0 +1,139 @@
+/* --- CSS KHUSUS HALAMAN BELANJA --- */
+
+/* 1. Wrapper Halaman Belanja */
+.shop-wrapper {
+    background-image: url('../Assets/background_img1.png'); 
+    background-size: cover;
+    background-position: top center;
+    background-attachment: fixed; /* Efek background diam saat discroll */
+    min-height: 100vh;
+    padding-top: 40px;
+    padding-bottom: 80px;
+}
+
+/* 2. Header Belanja (Judul & Filter) */
+.shop-header {
+    margin-bottom: 40px;
+}
+
+.shop-title {
+    font-size: 32px;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+}
+
+.shop-subtitle {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 24px;
+}
+
+/* 3. Tombol Filter */
+.filter-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Style Tombol Aktif (Biru) */
+.filter-btn.active {
+    background-color: #005BFD;
+    color: white;
+    border: 1px solid #005BFD;
+}
+
+/* Style Tombol Tidak Aktif (Putih Outline) */
+.filter-btn:not(.active) {
+    background-color: white;
+    color: #005BFD;
+    border: 1px solid #005BFD;
+}
+
+.filter-btn:hover:not(.active) {
+    background-color: #e6f0ff;
+}
+
+/* Checkbox di tombol */
+.check-box { font-size: 12px; }
+
+.check-box-outline {
+    width: 14px;
+    height: 14px;
+    border: 1px solid #005BFD;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+/* 4. Override Kartu Produk agar punya bayangan di halaman ini */
+.shop-wrapper .product-card {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+/* --- UPDATE: GRID 5 KOLOM --- */
+
+/* Paksa grid menjadi 5 kolom di layar besar */
+.shop-wrapper .product-grid {
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 16px; /* Jarak diperkecil sedikit agar muat 5 kartu */
+}
+
+/* Responsif: Sesuaikan jumlah kolom saat layar mengecil */
+@media (max-width: 1200px) {
+    .shop-wrapper .product-grid {
+        grid-template-columns: repeat(4, 1fr); /* Laptop kecil: 4 kolom */
+    }
+}
+
+@media (max-width: 992px) {
+    .shop-wrapper .product-grid {
+        grid-template-columns: repeat(3, 1fr); /* Tablet: 3 kolom */
+    }
+}
+
+@media (max-width: 768px) {
+    .shop-wrapper .product-grid {
+        grid-template-columns: repeat(2, 1fr); /* HP: 2 kolom */
+    }
+}
+
+/* --- STYLE TOMBOL MUAT LEBIH BANYAK --- */
+.load-more-container {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.btn-load-more {
+    background-color: transparent;
+    border: 2px solid #005BFD;
+    color: #005BFD;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    transition: all 0.3s;
+}
+
+.btn-load-more:hover {
+    background-color: #005BFD;
+    color: white;
+}
+
+/* Class untuk menyembunyikan produk tambahan */
+.hidden-item {
+    display: none;
+}
+

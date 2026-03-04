@@ -1,0 +1,922 @@
+/* Reset Dasar */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f5f5f5; /* Background abu-abu muda agar navbar terlihat */
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+/* Styling Container Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Logo kiri, Menu tengah, Tombol kanan */
+  align-items: center;
+  background-color: #ffffff;
+  padding: 16px 40px; /* Jarak dalam navbar */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Bayangan halus di bawah */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* 1. Styling Logo */
+/* Styling Logo Container */
+/* Styling Logo Container */
+.logo-container {
+  display: flex;
+  /* Menggunakan 'baseline' agar teks dan logo sejajar di garis bawahnya */
+  align-items: baseline;
+  gap: 2px; /* Jarak antara gambar logo dan teks Coop */
+}
+
+/* Styling Gambar Logo BTN */
+.logo-img {
+  height: 36px; /* Sesuaikan tinggi agar proporsional dengan teks */
+  width: auto; /* Lebar menyesuaikan otomatis */
+}
+
+/* Styling Teks Coop */
+.logo-text {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-style: italic;
+  font-weight: 800; /* Extra Bold */
+  font-size: 15px; /* Ukuran font lebih besar */
+  color: #005bfd; /* Warna Biru */
+  line-height: 1; /* Mengurangi jarak baris agar lebih padat */
+  letter-spacing: -0.5px; /* Sedikit merapatkan huruf */
+}
+
+/* 2. Styling Menu Links */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 40px; /* Jarak antar menu */
+}
+
+.nav-item {
+  text-decoration: none;
+  color: #4a90e2;
+  font-weight: 300; /* Light (Tipis) untuk menu yang tidak aktif */
+  font-size: 16px;
+  position: relative;
+  padding-bottom: 8px;
+  transition:
+    color 0.3s ease,
+    font-weight 0.2s ease;
+}
+
+/* Warna khusus untuk link aktif dan hover */
+.nav-item:hover {
+  color: #005bfd;
+  font-weight: 500; /* Medium saat di-hover */
+}
+
+.nav-item.active {
+  color: #005bfd;
+  font-weight: 700; /* Bold (Tebal) untuk menu aktif */
+}
+
+/* Garis Merah di bawah menu aktif */
+.nav-item.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #ff0000; /* Merah */
+  border-radius: 2px;
+}
+
+/* --- CSS TAMBAHAN UNTUK USER LOGIN --- */
+
+.user-logged-in {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Jarak antara nama dan tombol logout */
+}
+
+/* Styling Tombol Nama Profile (Mirip tombol login tapi beda warna/ikon) */
+.btn-profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #00c853; /* Warna Hijau agar beda dengan login */
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 200, 83, 0.2);
+}
+
+.btn-profile:hover {
+  background-color: #009624; /* Hijau lebih gelap saat hover */
+}
+
+/* Styling Tombol Logout (Ikon Pintu Keluar) */
+.btn-logout {
+  background: white;
+  border: 1px solid #ffe5e5;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%; /* Bulat sempurna */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.btn-logout:hover {
+  background-color: #fff0f0;
+  transform: scale(1.1); /* Sedikit membesar saat hover */
+  border-color: #ffcccc;
+}
+
+/* Responsive adjustment untuk HP */
+@media (max-width: 768px) {
+  .user-logged-in {
+    gap: 5px;
+  }
+
+  .btn-profile {
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+}
+/* --- CSS LOGIN MODAL --- */
+
+/* 1. Latar Belakang Gelap (Overlay) */
+.modal-overlay {
+  display: none; /* Sembunyikan secara default */
+  position: fixed;
+  z-index: 9999; /* Pastikan di paling atas */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Hitam transparan */
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px); /* Efek blur di background */
+  animation: fadeIn 0.3s;
+}
+
+/* 2. Kotak Putih Modal */
+.modal-content {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 20px;
+  width: 400px;
+  max-width: 90%;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s;
+}
+
+/* Tombol Close (X) */
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+/* 3. Styling Form */
+.modal-header h2 {
+  font-size: 24px;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.modal-header p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #005bfd;
+  box-shadow: 0 0 0 4px rgba(0, 91, 253, 0.1);
+}
+
+.form-actions {
+  text-align: right;
+  margin-bottom: 24px;
+}
+
+.forgot-pass {
+  font-size: 12px;
+  color: #005bfd;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Tombol Masuk */
+.btn-submit-login {
+  width: 100%;
+  background-color: #005bfd;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-submit-login:hover {
+  background-color: #0046c7;
+}
+
+/* Animasi */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 3. Styling Tombol Login */
+.btn-login {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Jarak ikon dan teks */
+  background-color: #005bfd; /* Biru Utama */
+  color: white;
+  text-decoration: none;
+  padding: 10px 24px;
+  border-radius: 50px; /* Membuat tombol bulat lonjong */
+  font-weight: 600;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-login:hover {
+  background-color: #0046c7; /* Biru sedikit lebih gelap saat di-hover */
+}
+
+/* --- HERO SECTION --- */
+/* Update di style.css */
+.hero-section {
+  background-image: url("../Assets/background_img1.png");
+  background-size: cover;
+  background-position: center;
+
+  /* UBAH BAGIAN INI */
+  min-height: auto; /* Hapus 100vh agar tingginya menyesuaikan konten saja */
+  padding-top: 30px; /* Atur jarak dari Navbar ke Banner di sini */
+  padding-bottom: 80px; /* Jarak bawah agar tidak terlalu mepet */
+  position: relative;
+  display: block; /* Ganti flex jadi block agar lebih mudah diatur margin-nya */
+  /* (Opsional) Hapus align-items: center karena kita tidak pakai flex lagi untuk layout luar */
+}
+
+.hero-section::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 150px; /* tinggi area blend */
+  background: linear-gradient(
+    to bottom,
+    rgba(245, 245, 245, 0) 0%,
+    #c8d0de 100%
+  );
+  pointer-events: none;
+}
+
+.container {
+  max-width: 1200px; /* Lebar maksimal konten agar rapi di tengah */
+  margin: 0 auto; /* Posisi tengah */
+  padding: 0 20px; /* Jarak aman kiri kanan di layar HP */
+}
+
+/* 1. Styling Banner Utama */
+/* Update di style.css */
+
+/* Update di style.css */
+
+.main-banner {
+  /* 1. Angular Gradient (Dioptimalkan agar teks terbaca) */
+  /* Logika: Bagian yang di Figma 0%, kita jadikan 0.5 (Putih Susu) agar tidak bolong */
+  background: conic-gradient(
+    from 35deg at 50% 50%,
+    rgba(255, 255, 255, 0.5) 0%,    /* Awal: Putih Susu (bukan transparan) */
+    rgba(255, 255, 255, 0.5) 21%,   /* Stop 1: Tetap Putih Susu */
+    rgba(225, 225, 225, 0.7) 23%,   /* Stop 2: Mulai makin putih */
+    rgba(240, 240, 240, 0.9) 26%,   /* Stop 3: Hampir putih solid */
+    #FFFFFF 73%,                    /* Stop 4: Putih Solid (Area Teks Utama) */
+    rgba(255, 255, 255, 0.5) 76%,   /* Stop 5: Kembali ke Putih Susu */
+    rgba(255, 255, 255, 0.5) 100%   /* Akhir */
+  );
+
+  /* 2. Efek Glassmorphism (Diperkuat) */
+  backdrop-filter: blur(20px);         /* Blur lebih kuat biar estetik */
+  -webkit-backdrop-filter: blur(20px); /* Support Safari */
+  border: 1px solid rgba(255, 255, 255, 0.4); /* Garis tepi kaca */
+  
+  /* 3. Layouting & Shape */        
+  border-radius: 15px;
+  padding: 40px 50px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  
+  /* 4. Shadow (Lebih halus) */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden; /* Agar efek cahaya tidak keluar dari radius */
+}
+
+/* Efek Pantulan Cahaya (Optional - Bikin makin kinclong) */
+.main-banner::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%; /* Diperbesar agar cover area saat rotasi */
+  height: 200%;
+  
+  /* Gradien cahaya halus melintas */
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 40%
+  );
+  
+  transform: rotate(-30deg);
+  pointer-events: none;
+  z-index: 0; /* Pastikan di bawah teks */
+}
+
+/* Pastikan konten banner (teks/logo) ada di atas efek background */
+.main-banner > * {
+  position: relative;
+  z-index: 1;
+}
+
+.banner-logo img {
+  width: 220px; /* Ukuran lingkaran logo_2 */
+  height: 220px;
+  object-fit: cover;
+  border-radius: 50%; /* Membuat logo jadi bulat */
+  /* background-color: #f0f0f0; Placeholder warna abu jika gambar transparan */
+}
+
+.banner-content h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.banner-content .highlight {
+  color: #005bfd; /* Warna Biru untuk teks 'di Koperasi...' */
+}
+
+.banner-desc {
+  font-size: 16px;
+  color: #444;
+  margin-bottom: 28px;
+
+  /* UBAH BAGIAN INI */
+  max-width: 450px; /* Lebar diperkecil agar teks terpotong jadi 3 baris */
+
+  line-height: 1.6; /* Jarak antar baris agar nyaman dibaca */
+}
+
+/* Tombol CTA (Lihat Katalog) */
+.btn-cta {
+  display: inline-block;
+  background-color: #005bfd;
+  color: white;
+  text-decoration: none;
+  padding: 12px 28px;
+  border-radius: 8px; /* Sudut sedikit melengkung */
+  font-weight: 600;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.btn-cta:hover {
+  background-color: #0046c7;
+}
+
+/* 2. Styling Grid Fitur (3 Kartu Bawah) */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 Kolom sama besar */
+  gap: 20px;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.85); /* Putih Transparan (Glass Effect) */
+  backdrop-filter: blur(10px); /* Efek blur di belakang kartu */
+  padding: 30px 20px;
+  border-radius: 20px;
+  text-align: center; /* Teks rata tengah */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px); /* Efek naik sedikit saat di-hover */
+}
+
+/* Styling Ikon di dalam kartu */
+.icon-circle {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 16px auto; /* Posisi tengah */
+  border-radius: 50%; /* Bulat */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-circle img {
+  width: 180px; /* Ukuran ikon di dalam lingkaran */
+  height: auto;
+}
+
+/* Warna latar belakang lingkaran ikon */
+.pink-bg {
+  background-color: #ead6d6;
+} /* Warna pink pudar untuk Belanja */
+.grey-bg {
+  background-color: #e0e0e0;
+} /* Warna abu untuk yang lain */
+
+.feature-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.feature-card p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.4;
+}
+
+/* Responsif untuk HP (Layar Kecil) */
+@media (max-width: 768px) {
+  .main-banner {
+    flex-direction: column; /* Banner jadi tumpuk vertikal */
+    text-align: center;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr; /* Kartu jadi 1 kolom ke bawah */
+  }
+}
+
+/* --- SECTION TENTANG KAMI --- */
+.about-section {
+  /* Gradien Linear sesuai Figma: #C8D0DE (12%) ke #4467D7 (91%) */
+  background: linear-gradient(180deg, #c8d0de 12%, #4467d7 91%);
+  padding: 100px 0; /* Memberi ruang atas bawah yang lega */
+  position: relative;
+  z-index: 1;
+}
+
+/* Kartu Putih Besar */
+.about-card {
+  background-color: #ffffff;
+  border-radius: 24px;
+  padding: 60px;
+  display: flex;
+  align-items: center;
+  gap: 60px; /* Jarak antara teks dan gambar */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Bagian Kiri (Konten) */
+.about-content {
+  flex: 1; /* Mengambil 50% lebar */
+}
+
+.badge-blue {
+  display: inline-block;
+  background-color: #e6f0ff; /* Biru sangat muda */
+  color: #005bfd; /* Biru BTN */
+  font-weight: 700;
+  font-size: 12px;
+  padding: 8px 16px;
+  border-radius: 50px;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+.about-content h2 {
+  font-size: 36px;
+  font-weight: 800; /* Extra Bold */
+  color: #1a1a1a;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.about-content p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  max-width: 450px;
+}
+
+/* List Fitur dengan Centang */
+.feature-list {
+  list-style: none;
+  padding: 0;
+}
+
+.feature-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.check-icon {
+  width: 24px;
+  height: 24px;
+  background-color: #e8f5e9; /* Hijau muda background ikon */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Bagian Kanan (Gambar) */
+.about-image-wrapper {
+  flex: 1;
+  position: relative; /* Agar stats-card bisa diposisikan absolute */
+}
+
+.about-img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Kartu Statistik Mengambang */
+.stats-card {
+  position: absolute;
+  bottom: 30px;
+  left: -30px; /* Membuatnya keluar sedikit ke kiri (offset) agar estetik */
+  background-color: #ffffff;
+  padding: 20px 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  min-width: 180px;
+}
+
+.stats-title {
+  display: block;
+  font-size: 10px;
+  color: #888;
+  font-weight: 600;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.stats-number {
+  display: block;
+  font-size: 20px;
+  font-weight: 800;
+  color: #005bfd;
+}
+
+/* Responsif Tablet/HP */
+@media (max-width: 992px) {
+  .about-card {
+    flex-direction: column; /* Tumpuk ke bawah */
+    padding: 40px;
+    text-align: center;
+  }
+
+  .about-content p,
+  .feature-list li {
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center; /* Ikon centang ikut tengah */
+  }
+
+  .about-image-wrapper {
+    width: 100%;
+  }
+
+  .stats-card {
+    left: 50%;
+    transform: translateX(-50%); /* Tengah secara horizontal */
+    bottom: -20px;
+  }
+}
+
+/* --- SECTION PRODUK --- */
+/* --- SECTION PRODUK --- */
+.product-section {
+  /* UBAH BAGIAN INI: Ganti background-color jadi linear-gradient */
+  /* Gradien dari Biru Tua (#4467D7) memudar ke Biru Muda Abu-abu (#C8D0DE) */
+  background: linear-gradient(180deg, #4467d7 0%, #c8d0de 100%);
+
+  padding-bottom: 100px;
+  padding-top: 40px; /* Sedikit tambah jarak atas */
+  position: relative;
+  z-index: 2;
+}
+
+.section-title {
+  text-align: center;
+  color: white;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 50px;
+}
+
+/* Grid Layout 4 Kolom */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 kolom sama rata */
+  gap: 24px;
+  margin-bottom: 60px;
+}
+
+/* Styling Kartu Produk */
+.product-card {
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  position: relative; /* Agar badge category bisa diposisikan absolute */
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  border: 2px solid transparent; /* Persiapan border biru saat hover */
+}
+
+.product-card:hover {
+  transform: translateY(-5px); /* Efek naik dikit saat hover */
+  border-color: #8bb3fc; /* Border biru muda saat hover (opsional) */
+}
+
+/* Badge Kategori (Drink) */
+.badge-category {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background-color: #005bfd; /* Biru BTN */
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 50px;
+  z-index: 10;
+}
+
+.product-img-wrapper {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.product-img-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.product-info h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+}
+
+.product-desc {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.product-price {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 16px;
+}
+
+/* Tombol Masukan Keranjang */
+.btn-add-cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #005bfd;
+  color: white;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 10px;
+  border-radius: 50px; /* Membuat tombol bulat lonjong */
+  transition: background 0.3s;
+  width: 100%; /* Tombol lebar penuh */
+}
+
+.btn-add-cart:hover {
+  background-color: #0046c7;
+}
+
+/* Tombol Besar (Lihat Selengkapnya) */
+.more-button-wrapper {
+  text-align: center;
+}
+
+.btn-see-more {
+  display: inline-block;
+  background-color: #005bfd;
+  color: white;
+  text-decoration: none;
+  padding: 16px 40px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 16px;
+  box-shadow: 0 4px 15px rgba(0, 91, 253, 0.3); /* Bayangan biru */
+  transition: transform 0.2s;
+}
+
+.btn-see-more:hover {
+  background-color: #0046c7;
+  transform: scale(1.05); /* Sedikit membesar saat di-hover */
+}
+
+/* Responsif Tablet/HP */
+@media (max-width: 992px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr); /* Tablet: 2 kolom */
+  }
+}
+
+@media (max-width: 576px) {
+  .product-grid {
+    grid-template-columns: 1fr; /* HP: 1 kolom */
+  }
+}
+
+/* --- FOOTER SECTION --- */
+.footer-section {
+  background-color: #005bfd; /* Biru BTN */
+  color: white;
+  padding: 60px 0 30px 0;
+  font-size: 14px;
+  position: relative;
+  z-index: 5;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr; /* Kolom pertama (alamat) lebih lebar */
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-col h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.address-text {
+  line-height: 1.6;
+  opacity: 0.8;
+  margin-bottom: 20px;
+}
+
+.contact-info p {
+  margin-bottom: 8px;
+  opacity: 0.8;
+}
+
+/* Link Style */
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: 12px;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.footer-links a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+/* Social Icons */
+.social-icons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.social-icons a {
+  opacity: 0.8;
+  transition: transform 0.3s;
+}
+
+.social-icons a:hover {
+  opacity: 1;
+  transform: translateY(-3px);
+}
+
+/* Divider & Bottom */
+.footer-divider {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 30px 0;
+}
+
+.footer-bottom p {
+  font-size: 12px;
+  opacity: 0.6;
+  line-height: 1.5;
+  margin-bottom: 5px;
+}
+
+/* Responsif Mobile */
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr; /* Jadi 1 kolom ke bawah di HP */
+    gap: 30px;
+  }
+}
